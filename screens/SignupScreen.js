@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text, 
@@ -9,13 +9,25 @@ import {
 } from 'react-native';
 
 import { useNavigation } from "@react-navigation/native";
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports';
 
-const SignupScreen = ({
-    state={
-        email:"",
-        password:""
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
+
+export default function SignUpScreen() {
+  const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    async function signUp() {
+    try {
+      await Auth.signUp({ username, password,  });
+      console.log(' Sign-up Confirmed');
+      navigation.navigate('Login');
+    } catch (error) {
+      console.log(' Error signing up...', error);
     }
-}) => {
+  }
+
     const navigation = useNavigation();
     return(
         <View style={styles.container}>
@@ -28,14 +40,18 @@ const SignupScreen = ({
                     marginBottom: 50
                   }}/>
              <View style={styles.inputView} >
-                <TextInput  
+                <TextInput
                     style={styles.inputText}
+                    value={username}
+                    onChangeText={text => setUsername(text)}
                     placeholder="Enter new email" 
                     placeholderTextColor="#003f5c"/>
             </View>
             <View style={styles.inputView} >
                 <TextInput  
                     style={styles.inputText}
+                    value={password}
+                    onChangeText={text => setPassword(text)}
                     placeholder="Enter new password" 
                     placeholderTextColor="#003f5c"
                     secureTextEntry/>
@@ -47,18 +63,13 @@ const SignupScreen = ({
             </TouchableOpacity>
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => 
-                    {alert('Signed Up!');
-                    navigation.goBack();}
-                }>
+                onPress={signUp}>
                 <Text style={{color: "white"}}>Sign Up</Text>
             </TouchableOpacity>
         </View>
-
     );
 };
 
-export default SignupScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
       },
       loginBtn:{
         width:"80%",
-        backgroundColor:"#191919",
+        backgroundColor:"#191919",  
         borderRadius:25,
         height:50,
         alignItems:"center",

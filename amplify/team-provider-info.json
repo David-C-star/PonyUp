@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ponyupapp-dev-114010-authRole",
+      "UnauthRoleArn": "arn:aws:iam::654394870850:role/amplify-ponyupapp-dev-114010-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::654394870850:role/amplify-ponyupapp-dev-114010-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-ponyupapp-dev-114010-deployment",
+      "UnauthRoleName": "amplify-ponyupapp-dev-114010-unauthRole",
+      "StackName": "amplify-ponyupapp-dev-114010",
+      "StackId": "arn:aws:cloudformation:us-east-2:654394870850:stack/amplify-ponyupapp-dev-114010/7649cb10-1d32-11eb-a9de-02b5bdb5cbf4",
+      "AmplifyAppId": "dwjzfd2aywc6g"
+    },
+    "categories": {
+      "auth": {
+        "ponyupappc9b67cc1": {}
+      }
+    }
+  }
+}
