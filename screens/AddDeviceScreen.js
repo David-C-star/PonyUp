@@ -7,27 +7,10 @@ import {
     TextInput,
     Image
 } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
 
-import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from '../aws-exports';
 
-Amplify.configure(awsconfig);
-Auth.configure(awsconfig);
-
-export default function ForgotPasswordScreen({ navigation} ) {
-    const [username, setUsername] = useState('');
-    async function forgotPassword() {
-        try {
-            await Auth.forgotPassword(username);
-            alert('A verification code has been sent to your email account.')
-            console.log(' Success');
-            navigation.navigate('Recovery');
-        } catch (error) {
-            console.log(' Error Finding Email', error);
-            alert('Email not found. Please enter a valid email')
-        }
-    }
+export default function AddDeviceScreen({ navigation }) {
+    const [number, setNumber] = useState('');
     return(
         <View style={styles.container}>
             <Image 
@@ -39,17 +22,19 @@ export default function ForgotPasswordScreen({ navigation} ) {
                     marginBottom: 50
                   }}/>
              <View style={styles.inputView} >
-                <TextInput  
+                <TextInput 
                     style={styles.inputText}
-                    value={username}
-                    onChangeText={text => setUsername(text)}
-                    placeholder="Enter registered email" 
+                    value={number}
+                    onChangeText={text => setNumber(text)}
+                    placeholder="Device Code" 
                     placeholderTextColor="#003f5c"/>
             </View>
+
+            
             <TouchableOpacity 
-                style={styles.forgot}
-                onPress={forgotPassword}>
-                <Text style={styles.forgot}>Get Recovery Code</Text>
+                style={styles.loginBtn}
+                onPress={() => navigation.navigate('AddAnimal')} >
+                <Text style={{color: "white"}}>Confirm Device</Text>
             </TouchableOpacity>
         </View>
 

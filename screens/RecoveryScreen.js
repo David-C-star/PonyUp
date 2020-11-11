@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text, 
@@ -8,16 +8,28 @@ import {
     Image
 } from 'react-native';
 
-import { useNavigation } from "@react-navigation/native";
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports';
 
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
 
-const PasswordRecoveryScreen = ({
-    state={
-        email:"",
-        password:""
+export default function RecoveryScreen({ navigation }) {
+    const [username, setUsername] = useState('');
+    const [authCode, setAuthCode] = useState('');
+    const [password, setPassword] = useState('');
+    async function setNewPassword() {
+        try {
+            await Auth.forgotPasswordSubmit(username, authCode, password);
+            alert('Password successfully changed.')
+            console.log(' Success');
+            navigation.navigate('Login');
+        } catch (error) {
+            alert('Error with the input information. Please ensure that the information entered is correct and try again.')
+            console.log(' Error Finding Email', error);
+        }
     }
-}) => {
-    const navigation = useNavigation();
+
     return(
         <View style={styles.container}>
             <Image 
@@ -31,28 +43,32 @@ const PasswordRecoveryScreen = ({
              <View style={styles.inputView} >
                 <TextInput  
                     style={styles.inputText}
+                    value={authCode}
+                    onChangeText={text => setAuthCode(text)}
                     placeholder="Enter the temporary code" 
                     placeholderTextColor="#003f5c"/>
             </View>
             <View style={styles.inputView} >
                 <TextInput  
                     style={styles.inputText}
-                    placeholder="Enter a new password" 
+                    value={username}
+                    onChangeText={text => setUsername(text)}
+                    placeholder="Enter the verified email" 
                     placeholderTextColor="#003f5c"
-                    secureTextEntry/>
+                />
             </View>
             <View style={styles.inputView} >
                 <TextInput  
                     style={styles.inputText}
-                    placeholder="Confirm password" 
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    placeholder="Enter a new password" 
                     placeholderTextColor="#003f5c"
                     secureTextEntry/>
             </View>
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => {
-                        alert("Password set, please login.");
-                        navigation.popToTop();}}>
+                onPress={setNewPassword}>
                 <Text style={{color: "white"}}>Set New Password</Text>
             </TouchableOpacity>
         </View>
@@ -60,7 +76,6 @@ const PasswordRecoveryScreen = ({
     );
 };
 
-export default PasswordRecoveryScreen;
 
 const styles = StyleSheet.create({
     container: {

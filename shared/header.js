@@ -37,7 +37,6 @@ class Header extends React.Component{
                     platform="android"
                     containerStyle={{backgroundColor: 'white', borderWidth: 1, borderRadius: 5,}}
                     round="true"
-                    
                     onChangeText={this.updateSearch}
                     value={search}
                     />
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     header:{
         height: 100,
         paddingRight: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#e05d06',
         alignItems: 'center',
         flexDirection: 'row',
     },

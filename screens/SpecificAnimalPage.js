@@ -1,16 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import Header from '../shared/header';
 import Animal_Section from '../shared/animalSection';
 import Information_Section from '../shared/informationSection';
 import Map_Section from '../shared/mapSection';
-import { useNavigation } from "@react-navigation/native"
 
 
 
-class SpecificAnimalPage extends React.Component{
-    render(){
+export default function SpecificAnimalPage() {
         return(
           <View style={styles.container}>
           <Header />
@@ -25,7 +23,6 @@ class SpecificAnimalPage extends React.Component{
     
         </View>
         );
-      }
 }
 
 
@@ -33,12 +30,11 @@ class SpecificAnimalPage extends React.Component{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#e05d06',
       
     },
   
     content: {
+      backgroundColor: '#e05d06'
     },
   });
-
-export default SpecificAnimalPage

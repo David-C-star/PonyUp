@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
     View,
@@ -9,7 +8,6 @@ import {
     Image
 } from 'react-native';
 
-import { useNavigation } from "@react-navigation/native";
 
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
@@ -17,18 +15,18 @@ import awsconfig from '../aws-exports';
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-export default function LoginScreen({ navigation, updateAuthState }) {
+export default function VerificationScreen({ navigation }) {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    async function signIn() {
+    const [authCode, setAuthCode] = useState('');
+    async function confirmSignUp() {
     try {
-        await Auth.signIn(username, password);
-        console.log(' Success');
-        updateAuthState('loggedIn');
+        await Auth.confirmSignUp(username, authCode);
+        alert('Account Created')
+        console.log(' Code confirmed');
+        navigation.navigate('Login');
         } catch (error) {
-            alert(error.message)
-            console.log(' Error signing in...', error);
-        }
+            alert('Verification code does not match. Please enter a valid verification code.')
+        };
     }
 
     return(
@@ -49,28 +47,19 @@ export default function LoginScreen({ navigation, updateAuthState }) {
                     placeholder="Email" 
                     placeholderTextColor="#003f5c"/>
             </View>
-            <View style={styles.inputView} >
+             <View style={styles.inputView} >
                 <TextInput  
                     style={styles.inputText}
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    placeholder="Password" 
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry/>
+                    value={authCode}
+                    onChangeText={text => setAuthCode(text)}
+                    placeholder="Enter the verification code" 
+                    placeholderTextColor="#003f5c"/>
             </View>
-            <TouchableOpacity 
-                style={styles.forgot}
-                onPress={() => navigation.navigate("Password")}>
-                <Text style={styles.forgot}>Forgot Password?</Text>
-            </TouchableOpacity>
+            
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={signIn}>
-                <Text style={{color: "white"}}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate("Signup")}>
-                <Text style={styles.forgot}>Signup</Text>
+                onPress={confirmSignUp} >
+                <Text style={{color: "white"}}>Confirm Sign up</Text>
             </TouchableOpacity>
         </View>
 

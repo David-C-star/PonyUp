@@ -31,12 +31,14 @@ class mapSection extends React.Component{
 const styles = StyleSheet.create({
     mapStyle:{
         height: '33%',
-        width: '100%'
+        width: '100%',
+        borderRadius: 20
     },
 
     container:{
         height: '100%',
-        width: '100%'
+        width: '100%',
+        borderRadius: 20
     }
 
 

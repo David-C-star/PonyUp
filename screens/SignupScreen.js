@@ -8,27 +8,27 @@ import {
     Image
 } from 'react-native';
 
-import { useNavigation } from "@react-navigation/native";
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation }) {
   const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     async function signUp() {
     try {
-      await Auth.signUp({ username, password,  });
+      await Auth.signUp({ username, password });
       console.log(' Sign-up Confirmed');
-      navigation.navigate('Login');
+      alert('A verification code has been sent to your email account.')
+      navigation.navigate('Verification');
     } catch (error) {
+      alert(error.message)
       console.log(' Error signing up...', error);
     }
   }
 
-    const navigation = useNavigation();
     return(
         <View style={styles.container}>
             <Image 

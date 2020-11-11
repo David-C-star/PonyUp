@@ -5,29 +5,15 @@ import {
     TouchableOpacity,
     StyleSheet,
     TextInput,
-    Image
+    Image    
 } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
 
-import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import {Picker} from '@react-native-community/picker';
 
-Amplify.configure(awsconfig);
-Auth.configure(awsconfig);
+export default function AddAnimalScreen({ navigation }) {
+    const [name, setName] = useState('');
+    const [animal, setAnimal] = useState('');
 
-export default function ForgotPasswordScreen({ navigation} ) {
-    const [username, setUsername] = useState('');
-    async function forgotPassword() {
-        try {
-            await Auth.forgotPassword(username);
-            alert('A verification code has been sent to your email account.')
-            console.log(' Success');
-            navigation.navigate('Recovery');
-        } catch (error) {
-            console.log(' Error Finding Email', error);
-            alert('Email not found. Please enter a valid email')
-        }
-    }
     return(
         <View style={styles.container}>
             <Image 
@@ -39,17 +25,30 @@ export default function ForgotPasswordScreen({ navigation} ) {
                     marginBottom: 50
                   }}/>
              <View style={styles.inputView} >
-                <TextInput  
+                <TextInput 
                     style={styles.inputText}
-                    value={username}
-                    onChangeText={text => setUsername(text)}
-                    placeholder="Enter registered email" 
+                    value={name}
+                    onChangeText={text => setName(text)}
+                    placeholder="Animal Name" 
                     placeholderTextColor="#003f5c"/>
             </View>
+             <View style={styles.inputView} >
+                <Picker
+                  style={{height: 40, width: 300 }}
+                  selectedValue={animal}
+                  onValueChange={(itemValue, itemIndex) => setAnimal(itemValue)}
+                  textStyle={{fontSize: 22}}
+                  prompt={'Select an Animal'}
+                >
+                <Picker.Item label="Horse" value="Horse" />
+                <Picker.Item label="Dog" value="Dog" />
+              </Picker>
+            </View>
+            
             <TouchableOpacity 
-                style={styles.forgot}
-                onPress={forgotPassword}>
-                <Text style={styles.forgot}>Get Recovery Code</Text>
+                style={styles.loginBtn}
+                onPress={() => navigation.navigate("Main")} >
+                <Text style={{color: "white"}}>Confirm Animal</Text>
             </TouchableOpacity>
         </View>
 

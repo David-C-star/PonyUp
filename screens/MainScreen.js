@@ -10,20 +10,28 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  Button
+  Button,
+  Text, 
 } from 'react-native';
-import { ApplicationProvider, Text, Avatar, Input  } from '@ui-kitten/components'
-import { mapping, light as lightTheme } from '@eva-design/eva'
-import { useNavigation } from "@react-navigation/native"
+import { SearchBar } from 'react-native-elements';
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports';
 
-const MainScreen = () => (
-  <ApplicationProvider mapping={mapping} theme={lightTheme}>
-    <HomeScreen />
-  </ApplicationProvider>
-)
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
 
-const HomeScreen = () => {
-  const navigation = useNavigation();
+
+export default function MainScreen({ navigation, updateAuthState }) { 
+
+  async function signOut() {
+    try {
+      await Auth.signOut();
+      updateAuthState('loggedOut');
+    } catch (error) {
+      console.log('Error signing out: ', error);
+    }
+  }
+  
   let listViewRef;
   const [dataSource, setDataSource] = useState([
     { id: 1, title: 'Animal' },
@@ -51,17 +59,17 @@ const HomeScreen = () => {
           flexDirection: 'row',
           alignItems: 'center'
         }}>
-        <Text style={ styles.itemStyle }onPress={() => getItem(item)}>
+        <Text style={ styles.itemStyle } onPress={() => getItem(item)}>
         {item.title}
         {' - '}
         {item.id}
         </Text>
-        <Avatar
-          shape='round'
-          source={ require('../images/horse.jpg') }
-          size='giant'
-          style={{ position: 'absolute', right: 50 }}
-        />
+        <View>
+          <Image
+            style={styles.animalImage}
+            source={require('../images/horse.jpg')}
+          />
+        </View>
       </View>
     );
   };
@@ -84,11 +92,10 @@ const HomeScreen = () => {
 
   const getItem = (item) => {
     // Function for click on an item
-    navigation.navigate("SpecificAnimal")
+    navigation.navigate('SpecificAnimal');
   };
 
   const renderHeader = () => (
-    
     <View
       style={{
         backgroundColor: '#e05d06',
@@ -98,20 +105,16 @@ const HomeScreen = () => {
         justifyContent: 'center',
         top: 5
       }}>
-      <Input
-        autoCapitalize='none'
-        autoCorrect={false}
-        onChangeText={console.log(" ")}
-        status='info'
-        placeholder='Search'
-        style={{
-          borderRadius: 25,
-          borderColor: '#333',
-          backgroundColor: '#fff'
-        }}
-        textStyle={{ color: '#000' }}
-        clearButtonMode='always'
-      />
+      <View style={styles.itemStyleSearch}>
+        <SearchBar
+          placeholder="Search"
+          inputStyle={{backgroundColor: 'white', height: 30}}
+          platform="android"
+          containerStyle={{backgroundColor: 'white', borderWidth: 1, borderRadius: 20, height: 60}}
+          round="true"
+          onChangeText={console.log("")}
+          />
+      </View>
     </View>
   )
   
@@ -119,15 +122,20 @@ const HomeScreen = () => {
       <View>
         <Button
         title="Register a New Device"
-        onPress={() => alert('Going to New Device Page')}
+        onPress={() => navigation.navigate('AddDevice')}
         color='grey'
         /> 
       </View>
   )
 
   return (
+    
     <SafeAreaView style={{ flex: 1, backgroundColor: '#e05d06'}}>
       <StatusBar backgroundColor="grey"/>
+      <TouchableOpacity
+         onPress={signOut}>
+        <Text style={styles.forgot}>Sign Out</Text>
+      </TouchableOpacity>
       <FlatList
         data={dataSource}
         keyExtractor={(item, index) => index.toString()}
@@ -149,6 +157,31 @@ const styles = StyleSheet.create({
     fontSize: 23,
     fontWeight: 'bold',
   },
+  container: {
+        flex: 1,
+        alignItems: 'center',
+        marginTop: 20
+      },
+  animalImage:{
+        height: 60,
+        width: 60,
+        borderRadius: 30,
+        right: -120
+    },
+    itemStyleSearch: {
+      flex: 1,
+      alignItems: 'center',
+      height: 10,
+      marginTop: 5,
+      marginBottom: 10,
+      justifyContent: 'center'
+  },
+    inputView:{
+      borderRadius: 10,
+      borderColor: '#333',
+      backgroundColor: '#fff',
+      width: 300,
+      height: 30
+    }
 })
 
-export default MainScreen;
