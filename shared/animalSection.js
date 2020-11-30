@@ -5,7 +5,7 @@ import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 class animalSection extends React.Component{
 
     render(){
-        var animalName = "Animal 1"
+        var animalName = this.props.id;
         return(
 
             <View style={styles.specAnimalBox}>

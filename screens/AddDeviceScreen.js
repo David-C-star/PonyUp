@@ -1,3 +1,4 @@
+import { API, graphqlOperation } from 'aws-amplify';
 import React, { useState } from 'react';
 import {
     View,
@@ -7,10 +8,29 @@ import {
     TextInput,
     Image
 } from 'react-native';
+import { createDevices, updateDevices } from '../graphql/mutations';
 
 
 export default function AddDeviceScreen({ navigation }) {
     const [number, setNumber] = useState('');
+
+    const addDevice = async () => {
+      try{
+          var deviceInfo={
+              "contraction": "",
+              "createdAt": "",
+              "description": "",
+              "gps": "",
+              "id": "",
+              "name": "",
+              "temperature": "",
+              "updatedAt": ""
+          }
+          const device = await API.graphql(graphqlOperation(createDevices,deviceInfo));
+      }catch(error){
+        console.log("error while adding the device: ", error);
+      }
+    }
     return(
         <View style={styles.container}>
             <Image 

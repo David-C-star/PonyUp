@@ -15,8 +15,6 @@ class Header extends React.Component{
       };
 
     render(){
-        //const navigation = useNavigation();
-        const { navigation } = this.props;
         const { search } = this.state;
         return(
             <View style={styles.header}>

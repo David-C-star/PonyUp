@@ -8,16 +8,17 @@ import Map_Section from '../shared/mapSection';
 
 
 
-export default function SpecificAnimalPage() {
-        return(
+export default function SpecificAnimalPage({route}) {
+        const deviceInfo = route.params;
+        return(  
           <View style={styles.container}>
           <Header />
     
           <View style={styles.content}>
             {/* form */}
-            <Animal_Section />
-            <Information_Section />
-            <Map_Section />
+            <Animal_Section id={deviceInfo["id"]}/>
+            <Information_Section contraction={deviceInfo["contraction"]} temp={deviceInfo["temperature"]}/>
+            <Map_Section latlong={deviceInfo["gps"]}/>
 
           </View>
     
