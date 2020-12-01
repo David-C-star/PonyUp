@@ -1,5 +1,17 @@
-type Todo @model {
+type Devices @model {
   id: ID!
   name: String!
-  description: String
+  description: String!
+  temperature: String!
+  contraction: String!
+  gps: String!
+}
+
+type UserDev {
+  id: ID!
+}
+
+type Users @model {
+  id: ID!
+  deviceID: [ID!]
 }

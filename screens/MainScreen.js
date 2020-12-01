@@ -1,5 +1,5 @@
 // import React in our code
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import all the components we are going to use
 import {
@@ -14,8 +14,10 @@ import {
   Text, 
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import {getUsers, listDevicess} from '../graphql/queries';
+import * as subscriptions from '../graphql/subscriptions';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -31,25 +33,65 @@ export default function MainScreen({ navigation, updateAuthState }) {
       console.log('Error signing out: ', error);
     }
   }
+
+  const[devices, setDevices] = useState([]);
+
+  useEffect(()=>{
+    fetchDevice();
+  }, [])
+
+  const fetchDevice = async () => {
+    try{
+      const email = Auth.user.attributes.email
+      const user = await API.graphql({ query: getUsers, variables: { id: email }})
+      const userDevices = user.data.getUsers
+      const tempDevices = userDevices.deviceID
+      console.log(tempDevices)
+      const deviceData = await API.graphql(graphqlOperation(listDevicess));
+      const deviceList = deviceData.data.listDevicess.items;
+      var i;
+      for (i = 0; i < deviceList.length; i ++) {
+        if(!tempDevices.includes(deviceList[i].id))
+        {
+          console.log("removed", deviceList[i].id)
+          deviceList.splice(i, 1)
+          i = i - 1 
+        }
+      }
+      console.log(deviceList)
+      setDevices(deviceList);
+      //console.log("Devices:", deviceList);
+    }catch(error){
+      console.log("error while fetching devices: ", error);
+    }
+  }
   
+
+  const createSubscription = API.graphql(
+    graphqlOperation(subscriptions.onCreateDevices)
+    ).subscribe({
+      next: () => {
+        fetchDevice();
+      }
+    });
+
+  const updateSubscription = API.graphql(
+    graphqlOperation(subscriptions.onUpdateDevices)
+    ).subscribe({
+      next: () => {
+        fetchDevice();
+      }
+    });
+
+  const deleteSubscription = API.graphql(
+    graphqlOperation(subscriptions.onDeleteDevices)
+    ).subscribe({
+      next: () => {
+        fetchDevice();
+      }
+    });
+
   let listViewRef;
-  const [dataSource, setDataSource] = useState([
-    { id: 1, title: 'Animal' },
-    { id: 2, title: 'Animal'},
-    { id: 3, title: 'Animal' },
-    { id: 4, title: 'Animal' },
-    { id: 5, title: 'Animal' },
-    { id: 6, title: 'Animal' },
-    { id: 7, title: 'Animal' },
-    { id: 8, title: 'Animal'},
-    { id: 9, title: 'Animal' },
-    { id: 10, title: 'Animal' },
-    { id: 11, title: 'Animal' },
-    { id: 12, title: 'Animal' },
-    { id: 13, title: 'Animal' },
-    { id: 14, title: 'Animal' },
-    { id: 15, title: 'Animal' },
-  ]);
 
   const ItemView = ({ item }) => {
     return (
@@ -57,14 +99,13 @@ export default function MainScreen({ navigation, updateAuthState }) {
       <View
         style={{
           flexDirection: 'row',
-          alignItems: 'center'
+          alignItems: 'center',
+          flex: 1
         }}>
         <Text style={ styles.itemStyle } onPress={() => getItem(item)}>
-        {item.title}
-        {' - '}
-        {item.id}
+        {item.name}
         </Text>
-        <View>
+        <View >
           <Image
             style={styles.animalImage}
             source={require('../images/horse.jpg')}
@@ -92,7 +133,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
 
   const getItem = (item) => {
     // Function for click on an item
-    navigation.navigate('SpecificAnimal');
+    navigation.navigate('SpecificAnimal', item);
   };
 
   const renderHeader = () => (
@@ -137,7 +178,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
         <Text style={styles.forgot}>Sign Out</Text>
       </TouchableOpacity>
       <FlatList
-        data={dataSource}
+        data={devices}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={ItemSeparatorView}
         renderItem={ItemView}
@@ -166,7 +207,6 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 30,
-        right: -120
     },
     itemStyleSearch: {
       flex: 1,
@@ -184,4 +224,3 @@ const styles = StyleSheet.create({
       height: 30
     }
 })
-

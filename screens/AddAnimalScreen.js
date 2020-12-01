@@ -9,11 +9,34 @@ import {
 } from 'react-native';
 
 import {Picker} from '@react-native-community/picker';
+import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import { getUsers } from '../graphql/queries';
+import { updateDevices } from '../graphql/mutations';
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
 
 export default function AddAnimalScreen({ navigation }) {
     const [name, setName] = useState('');
-    const [animal, setAnimal] = useState('');
-
+    const [animal, setAnimal] = useState('Horse');
+    async function newAnimal() {
+      try {
+        const email = Auth.user.attributes.email  
+        const user = await API.graphql({ query: getUsers, variables: { id: email }})
+        const userDevices = user.data.getUsers
+        const tempDevices = userDevices.deviceID
+        const newDeviceID = tempDevices[tempDevices.length - 1]
+        console.log(newDeviceID)
+        navigation.navigate('Main');
+        try{
+          await API.graphql(graphqlOperation(updateDevices, {input: {"id": newDeviceID, "description": animal, "name": name}}))
+        } catch(error) {
+          console.log("inner", error)
+        }
+      } catch (error) {
+          console.log(error)
+      };
+    }
     return(
         <View style={styles.container}>
             <Image 
@@ -47,7 +70,7 @@ export default function AddAnimalScreen({ navigation }) {
             
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => navigation.navigate("Main")} >
+                onPress={newAnimal} >
                 <Text style={{color: "white"}}>Confirm Animal</Text>
             </TouchableOpacity>
         </View>
