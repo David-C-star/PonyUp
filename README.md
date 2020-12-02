@@ -18,13 +18,15 @@ After successfully cloning the application, navigate to the project folder. Run 
 
 `amplify pull` 
  
-This will also create a javascript file named "aws-exports.js" with the project specific secrets. This is needed to compile the app successfully.  
+You will be asked to create a new environment. Choose No and choose "dev" as the environment. You will be asked of the accessID and password. Use these credentials (linked to the organizational Amplify account) and choose US-east-2 as the region of choice. This will create a javascript file named "aws-exports.js" with the project specific secrets. This is needed to compile the app successfully.  
 
 Once this successfully executes, the app can be started using the following command:
 
 `npm start`  
 
-This will launch an expo console which allows the app to be run using IOS/Android Emulator, browser website, or mobile phone through the Expo app (scanning the QR code).
+This will launch an expo console which allows the app to be run using IOS/Android Emulator, browser website, or mobile phone through the Expo app (scanning the QR code).   
+
+Note: if the app does not launch, it might be because of the lack of certain packages. Follow the error message carefully and download all the packages necessary.
 
 ### App feature
 The app is able to perform following activity:   
