@@ -45,6 +45,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
       const email = Auth.user.attributes.email
       const user = await API.graphql({ query: getUsers, variables: { id: email }})
       const userDevices = user.data.getUsers
+      console.log(userDevices)
       const tempDevices = userDevices.deviceID
       console.log(tempDevices)
       const deviceData = await API.graphql(graphqlOperation(listDevicess));
