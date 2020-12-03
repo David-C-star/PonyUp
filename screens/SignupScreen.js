@@ -28,7 +28,7 @@ export default function SignUpScreen({ navigation }) {
       console.log(' Error signing up...', error);
     }
   }
-
+       
     return(
         <View style={styles.container}>
             <Image 

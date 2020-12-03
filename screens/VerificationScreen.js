@@ -8,9 +8,9 @@ import {
     Image
 } from 'react-native';
 
-
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
 import awsconfig from '../aws-exports';
+import { createUsers } from '../graphql/mutations';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -19,16 +19,22 @@ export default function VerificationScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [authCode, setAuthCode] = useState('');
     async function confirmSignUp() {
-    try {
+      try {
         await Auth.confirmSignUp(username, authCode);
         alert('Account Created')
         console.log(' Code confirmed');
         navigation.navigate('Login');
-        } catch (error) {
-            alert('Verification code does not match. Please enter a valid verification code.')
-        };
+        try{
+          await API.graphql(graphqlOperation(createUsers, {input: {"id": username, "deviceID": [] }}))
+        } catch(error)
+        {
+          console.log(error)
+        }
+      } catch (error) {
+          alert('Verification code or email does not match. Please try again.')
+      };
     }
-
+       
     return(
         <View style={styles.container}>
             <Image 

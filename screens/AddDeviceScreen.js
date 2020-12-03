@@ -8,9 +8,39 @@ import {
     Image
 } from 'react-native';
 
+import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import { updateUsers } from '../graphql/mutations';
+import { getDevices, getUsers } from '../graphql/queries';
+
+Amplify.configure(awsconfig);
+Auth.configure(awsconfig);
 
 export default function AddDeviceScreen({ navigation }) {
-    const [number, setNumber] = useState('');
+    const [id, setID] = useState("");
+    async function newDevice() {
+      try{
+        const device = await API.graphql(graphqlOperation(getDevices, {id}))
+        navigation.navigate("AddAnimal")
+        try{
+          const email = Auth.user.attributes.email  
+          const user = await API.graphql({ query: getUsers, variables: { id: email }})
+          const userDevices = user.data.getUsers
+          const tempDevices = userDevices.deviceID
+          tempDevices.push(id)
+          console.log(tempDevices)
+          delete tempDevices.createdAt
+          delete tempDevices.updatedAt
+          await API.graphql(graphqlOperation(updateUsers, {input: {"id": email, "deviceID": tempDevices}}))
+        } catch(error)
+        {
+          console.log("test", error)
+        }
+      } catch(error)
+      {
+        console.log(error)
+      }
+    }
     return(
         <View style={styles.container}>
             <Image 
@@ -24,8 +54,8 @@ export default function AddDeviceScreen({ navigation }) {
              <View style={styles.inputView} >
                 <TextInput 
                     style={styles.inputText}
-                    value={number}
-                    onChangeText={text => setNumber(text)}
+                    value={id}
+                    onChangeText={text => setID(text)}
                     placeholder="Device Code" 
                     placeholderTextColor="#003f5c"/>
             </View>
@@ -33,7 +63,7 @@ export default function AddDeviceScreen({ navigation }) {
             
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => navigation.navigate('AddAnimal')} >
+                onPress={newDevice} >
                 <Text style={{color: "white"}}>Confirm Device</Text>
             </TouchableOpacity>
         </View>

@@ -7,6 +7,8 @@ class mapSection extends React.Component{
     
     
     render(){
+        var latlongData = this.props.latlong;
+        var splitData = latlongData.split(",");
         return(
             <View
             style={styles.container}>
@@ -15,8 +17,8 @@ class mapSection extends React.Component{
                 loadingEnabled={true}
                 provider={PROVIDER_GOOGLE}
                 initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
+                    latitude: parseFloat(splitData[0]),
+                    longitude: parseFloat(splitData[1]),
                     latitudeDelta: 0.015,
                     longitudeDelta: 0.0121,
                 }}

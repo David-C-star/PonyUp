@@ -1,13 +1,14 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
-var status_info = "N/A";
-var temp_info = "N/A";
-var contraction_info = "N/A";
+
 
 class informationSection extends React.Component{
 
 
     render(){
+        var status_info = "Normal";
+        var temp_info = this.props.temp;
+        var contraction_info = this.props.contraction;
 
         return(
             <View>
