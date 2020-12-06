@@ -40,6 +40,70 @@ export default function MainScreen({ navigation, updateAuthState }) {
     fetchDevice();
   }, [])
 
+  /*
+  const checkLabor = ({ item }) => {
+	
+	// These functions rely on a rolling average for both temperature
+	//	and contractions however that is apparently a bigger task than
+	// 	we have time for so I will be using a non-functional placeholder.
+	
+	// Additionally, we don't currently know how we will receive contraction
+	//	data so pseudocode will be used in its place
+	
+	// Rolling averages will be over a one hour span
+	
+	if ( item.description == 'Horse' )
+	{
+		if ( item.temperature < (item.rollTemp - 0.75))
+		{
+			if ( contractionFrequency is significantly higher than rollContr )
+			{
+				item.inLabor = true;
+			}
+			else
+			{
+				item.tempRolltemp = item.rollTemp;
+			}
+		else if ( item.rollTemp < (item.tempRolltemp - 0.5))
+		{
+			if ( item.contractionFrequency > item.rollContr )
+			{
+				item.inLabor = true;
+			}
+			else
+			{
+				// notify user of temperature drop not accompanied by contractions
+			}
+	}
+	else if ( item.description == 'Dog' )
+	{
+		if (item.temperature < 99 && item.rollTemp < 100)
+		{
+			item.inLabor = true;
+			// also notify user of unusually low temp
+		}
+		else if ( item.temperature < 100 && item.rollTemp > 100.5 )
+		{
+			item.inLabor = true;
+		}
+	}
+	else if ( item.description == 'Sheep' )
+	{
+		if ( item.temperature < 101.6 && item.contrLen > 15 )
+		{
+			item.inLabor = true;
+		}
+		else if ( item.rollTemp < 101.6 )
+		{
+			item.inLabor = true;
+		}
+	}
+	else
+	{
+		// no other animals currently supported
+	}
+  }*/
+
   const fetchDevice = async () => {
     try{
       const email = Auth.user.attributes.email
@@ -60,6 +124,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
         }
       }
       console.log(deviceList)
+	  //checkLabor()
       setDevices(deviceList);
       //console.log("Devices:", deviceList);
     }catch(error){
@@ -103,8 +168,8 @@ export default function MainScreen({ navigation, updateAuthState }) {
           alignItems: 'center',
           flex: 1
         }}>
-        <Text style={ styles.itemStyle } onPress={() => getItem(item)}>
-        {item.name}
+        <Text style={ item.inLabor ? styles.itemStyleAlert : styles.itemStyle } onPress={() => getItem(item)}>
+        {item.inLabor ? item.name.toUpperCase() : item.name}
         </Text>
         <View >
           <Image
@@ -198,6 +263,12 @@ const styles = StyleSheet.create({
     padding: 30,
     fontSize: 23,
     fontWeight: 'bold',
+  },
+   itemStyleAlert: {
+    padding: 30,
+    fontSize: 23,
+    fontWeight: 'bold',
+	color: 'red'
   },
   container: {
         flex: 1,
