@@ -24,7 +24,7 @@ Auth.configure(awsconfig);
 
 
 export default function MainScreen({ navigation, updateAuthState }) { 
-
+  // Handles Signing user out
   async function signOut() {
     try {
       await Auth.signOut();
@@ -40,6 +40,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
     fetchDevice();
   }, [])
 
+  // Gets and lists devices attached to a user's account
   const fetchDevice = async () => {
     try{
       const email = Auth.user.attributes.email
@@ -61,13 +62,12 @@ export default function MainScreen({ navigation, updateAuthState }) {
       }
       console.log(deviceList)
       setDevices(deviceList);
-      //console.log("Devices:", deviceList);
     }catch(error){
       console.log("error while fetching devices: ", error);
     }
   }
   
-
+  // Subscriptions to handle changes in database
   const createSubscription = API.graphql(
     graphqlOperation(subscriptions.onCreateDevices)
     ).subscribe({
