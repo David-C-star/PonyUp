@@ -27,6 +27,7 @@ function AppNavigation() {
     useEffect(() => {
         checkAuthState();
     }, []);
+    // Checks is user is signed in 
     async function checkAuthState() {
         try {
             await Auth.currentAuthenticatedUser();
@@ -42,6 +43,7 @@ function AppNavigation() {
         setUserLoggedIn(isUserLoggedIn);
     }
 
+    // Navigation if user is not logged in
     const AuthenticationNavigator = props => {
         return (
             <AuthenticationStack.Navigator headerMode="none">
@@ -58,7 +60,7 @@ function AppNavigation() {
         );
     };
     
-    
+    // Navigation if user is logged in 
     const AppNavigator = props => {
         return (
             <Stack.Navigator headerMode="none">

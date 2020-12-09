@@ -20,8 +20,9 @@ export default function AddDeviceScreen({ navigation }) {
     const [id, setID] = useState("");
     async function newDevice() {
       try{
-        const device = await API.graphql(graphqlOperation(getDevices, {id}))
+        const device = await API.graphql(graphqlOperation(getDevices, {id})) // Checks if device is in database
         navigation.navigate("AddAnimal")
+        // Attaches device to user account
         try{
           const email = Auth.user.attributes.email  
           const user = await API.graphql({ query: getUsers, variables: { id: email }})

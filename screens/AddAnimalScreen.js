@@ -19,6 +19,7 @@ Auth.configure(awsconfig);
 export default function AddAnimalScreen({ navigation }) {
     const [name, setName] = useState('');
     const [animal, setAnimal] = useState('Horse');
+    // Attaches animal name + species to last created device
     async function newAnimal() {
       try {
         const email = Auth.user.attributes.email  
