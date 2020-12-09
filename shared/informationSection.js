@@ -6,7 +6,7 @@ class informationSection extends React.Component{
 
 
     render(){
-        var status_info = "Normal";
+		var status_info = ( this.props.inLabor ? "In Labor" : "Normal" );
         var temp_info = this.props.temp;
         var contraction_info = this.props.contraction;
 
