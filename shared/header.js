@@ -1,8 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { TouchableHighlight } from 'react-native-gesture-handler';
-import { useNavigation } from "@react-navigation/native"
+
 
 class Header extends React.Component{
 
@@ -16,19 +15,9 @@ class Header extends React.Component{
 
     render(){
         //const navigation = useNavigation();
-        const { navigation } = this.props;
+        //const { navigation } = this.props;
         const { search } = this.state;
         return(
-            <View style={styles.header}>
-
-                <View style={styles.itemStyleText}>
-                    <TouchableHighlight onPress={() => alert("Back")}>
-                        <Image
-                        style={styles.tinyImage}
-                        source={require('../images/backButton.png')}
-                        />
-                    </TouchableHighlight>
-                </View>
 
                 <View style={styles.itemStyleSearch}>
                     <SearchBar
@@ -41,8 +30,6 @@ class Header extends React.Component{
                     value={search}
                     />
                 </View>
-                
-            </View>
         )
     }
 }
