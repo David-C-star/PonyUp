@@ -13,7 +13,7 @@ import AddAnimalScreen from "../screens/AddAnimalScreen"
 import AddDeviceScreen from "../screens/AddDeviceScreen"
 
 import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../src/aws-exports';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);

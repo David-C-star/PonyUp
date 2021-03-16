@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../src/aws-exports';
 import { createUsers } from '../graphql/mutations';
 
 Amplify.configure(awsconfig);

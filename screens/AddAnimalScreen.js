@@ -10,7 +10,7 @@ import {
 
 import {Picker} from '@react-native-community/picker';
 import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../src/aws-exports';
 import { getUsers } from '../graphql/queries';
 import { updateDevices } from '../graphql/mutations';
 Amplify.configure(awsconfig);

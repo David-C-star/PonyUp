@@ -12,7 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../src/aws-exports';
 
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
@@ -81,7 +81,7 @@ export default function LoginScreen({ navigation, updateAuthState }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e05d06',
+        backgroundColor: '#d84524',
         alignItems: 'center',
         justifyContent: 'center',
       },

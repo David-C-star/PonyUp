@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Amplify, { API, Auth, graphqlOperation } from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../src/aws-exports';
 import {getUsers, listDevicess} from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 
