@@ -63,8 +63,7 @@ export default function RecoveryScreen({ navigation }) {
                     value={password}
                     onChangeText={text => setPassword(text)}
                     placeholder="Enter a new password" 
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry/>
+                    placeholderTextColor="#003f5c"/>
             </View>
             <TouchableOpacity 
                 style={styles.loginBtn}
