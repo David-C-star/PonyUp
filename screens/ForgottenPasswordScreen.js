@@ -47,7 +47,7 @@ export default function ForgotPasswordScreen({ navigation} ) {
                     placeholderTextColor="#003f5c"/>
             </View>
             <TouchableOpacity 
-                style={styles.forgot}
+                style={styles.loginBtn}
                 onPress={forgotPassword}>
                 <Text style={styles.forgot}>Get Recovery Code</Text>
             </TouchableOpacity>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         color:"black"
       },
       forgot:{
-        color:"black",
+        color:"white",
         fontSize:15
       },
       loginBtn:{
