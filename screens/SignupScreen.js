@@ -53,8 +53,7 @@ export default function SignUpScreen({ navigation }) {
                     value={password}
                     onChangeText={text => setPassword(text)}
                     placeholder="Enter new password" 
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry/>
+                    placeholderTextColor="#003f5c"/>
             </View>
             <TouchableOpacity 
                 style={styles.forgot}
