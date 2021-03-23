@@ -205,7 +205,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   const renderHeader = () => (
     <View
       style={{
-        backgroundColor: '#e05d06',
+        backgroundColor: '#d84524',
         height: 70,
         padding: 10,
         alignItems: 'center',

@@ -44,7 +44,7 @@ export default function SpecificAnimalPage({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#e05d06',
+      backgroundColor: '#d84524',
       
     },
   
