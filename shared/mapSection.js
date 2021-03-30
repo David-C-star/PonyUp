@@ -1,3 +1,4 @@
+import {Text} from 'react-native';
 import React from 'react';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import {StyleSheet, View, Dimensions} from 'react-native';
@@ -7,10 +8,14 @@ class mapSection extends React.Component{
     
     
     render(){
-        var latlongData = this.props.latlong;
-        var splitData = latlongData.split(",");
+        //var latlongData = this.props.latlong;
+        //var splitData = latlongData.split(",");
         return(
-            <View
+            <Text>
+            {"hi"}
+            </Text>
+            /*
+                        <View
             style={styles.container}>
                 <MapView 
                 style={styles.mapStyle}
@@ -25,7 +30,9 @@ class mapSection extends React.Component{
                 >
                 </MapView>
             </View>
+            */
         )
+
     }
 
 }
