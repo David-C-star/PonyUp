@@ -31,7 +31,7 @@ export default function SpecificAnimalPage({route, navigation}) {
             {/* form */}
             <Animal_Section id = {deviceInfo["id"]}/>
             <Information_Section contraction={deviceInfo["contraction"]} temp={deviceInfo["temperature"]}/>
-            <Map_Section latlong={deviceInfo["gps"]}/>
+            //<Map_Section latlong={deviceInfo["gps"]}/>
 
           </View>
     

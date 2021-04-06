@@ -30,8 +30,8 @@ export default function AddDeviceScreen({ navigation }) {
           const tempDevices = userDevices.deviceID
           tempDevices.push(id)
           console.log(tempDevices)
-          delete tempDevices.createdAt
-          delete tempDevices.updatedAt
+          //delete tempDevices.createdAt
+          //delete tempDevices.updatedAt
           await API.graphql(graphqlOperation(updateUsers, {input: {"id": email, "deviceID": tempDevices}}))
         } catch(error)
         {

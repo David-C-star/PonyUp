@@ -5,14 +5,15 @@ import {StyleSheet, View, Dimensions} from 'react-native';
 
 
 class mapSection extends React.Component{
-    
-    
+
     render(){
         //var latlongData = this.props.latlong;
         //var splitData = latlongData.split(",");
+        //console.log("lat", splitData[0]);
+        //console.log("long", splitData[1]);
         return(
             <Text>
-            {"hi"}
+            {"hi, I don't know what we're gonna do here"}
             </Text>
             /*
                         <View
