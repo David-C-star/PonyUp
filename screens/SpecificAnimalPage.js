@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native"
 import Header from '../shared/header';
 import Animal_Section from '../shared/animalSection';
 import Information_Section from '../shared/informationSection';
-import Map_Section from '../shared/mapSection';
+// import Map_Section from '../shared/mapSection';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
@@ -35,7 +35,7 @@ export default function SpecificAnimalPage({route, navigation}) {
             {/* form */}
             <Animal_Section id = {deviceInfo["id"]}/>
             <Information_Section contraction={deviceInfo["contraction"]} temp={deviceInfo["temperature"]}/>
-            <Map_Section latlong={deviceInfo["gps"]}/>
+           
 
           </View>
     
