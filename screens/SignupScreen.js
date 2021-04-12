@@ -34,8 +34,8 @@ export default function SignUpScreen({ navigation }) {
             <Image 
                 source={require('../images/logo2.png')} 
                 style={{
-                    width: 200,
-                    height: 200,
+                    width: 300,
+                    height: 300,
                     resizeMode: 'contain',
                     marginBottom: 50
                   }}/>

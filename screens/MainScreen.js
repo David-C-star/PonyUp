@@ -171,13 +171,6 @@ export default function MainScreen({ navigation, updateAuthState }) {
         <Text style={ item.inLabor ? styles.itemStyleAlert : styles.itemStyle } onPress={() => getItem(item)}>
         {item.inLabor ? item.name.toUpperCase() : item.name}
         </Text>
-        <View style={styles.editButtonSection}>
-          <Button
-            title="Edit"
-            onPress={() => navigation.navigate('AddDevice')}
-            color="grey"
-          />
-        </View>
         <View >
           <Image
             style={styles.animalImage}
@@ -237,7 +230,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
         <Button
         title="Register a New Device"
         onPress={() => navigation.navigate('AddDevice')}
-        color='grey'
+        color='white'
         /> 
       </View>
   )
@@ -282,11 +275,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
       },
-  editButtonSection:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight:'10%'
-  },
+
   animalImage:{
         height: 60,
         width: 60,

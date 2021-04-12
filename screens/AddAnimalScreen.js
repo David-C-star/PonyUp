@@ -43,8 +43,8 @@ export default function AddAnimalScreen({ navigation }) {
             <Image 
                 source={require('../images/logo2.png')} 
                 style={{
-                    width: 200,
-                    height: 200,
+                    width: 300,
+                    height: 300,
                     resizeMode: 'contain',
                     marginBottom: 50
                   }}/>
@@ -58,7 +58,7 @@ export default function AddAnimalScreen({ navigation }) {
             </View>
              <View style={styles.inputView} >
                 <Picker
-                  style={{height: 40, width: 300 }}
+                  style={{height: Platform.OS === 'ios' ? 220 : 40, width: 300 }}
                   selectedValue={animal}
                   onValueChange={(itemValue, itemIndex) => setAnimal(itemValue)}
                   textStyle={{fontSize: 22}}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#ffe4b5",
         borderRadius:25,
         height:50,
-        marginBottom:20,
+        marginBottom:Platform.OS === 'ios' ? 62 : 20,
         justifyContent:"center",
         padding:20
       },
