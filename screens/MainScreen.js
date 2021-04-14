@@ -237,7 +237,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
         <Button
         title="Register a New Device"
         onPress={() => navigation.navigate('AddDevice')}
-        color='white'
+        color='grey'
         /> 
       </View>
   )

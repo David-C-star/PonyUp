@@ -9,7 +9,12 @@ export const getDevices = /* GraphQL */ `
       description
       temperature
       contraction
-      gps
+      accx
+      accy
+      accz
+      gyx
+      gyy
+      gyz
       createdAt
       updatedAt
     }
@@ -28,7 +33,12 @@ export const listDevicess = /* GraphQL */ `
         description
         temperature
         contraction
-        gps
+        accx
+        accy
+        accz
+        gyx
+        gyy
+        gyz
         createdAt
         updatedAt
       }
