@@ -6,6 +6,9 @@ class informationSection extends React.Component{
 
 
     render(){
+        //All the data that will be displayed are declared into variables.
+        //Accelerometer and Gyroscope data are stored in arrays of length 3.
+        //0, 1, and 2 in the arrays are the X, Y, and Z coordinates, respectively. 
 		var status_info = ( this.props.inLabor ? "In Labor" : "Normal" );
         var temp_info = this.props.temp;
         var contraction_info = this.props.contraction;
@@ -39,6 +42,9 @@ class informationSection extends React.Component{
                         <Text style={styles.textSpecs}>Accelerometer X:</Text>
                         <Text style={styles.textSpecs}>Accelerometer Y:</Text>
                         <Text style={styles.textSpecs}>Accelerometer Z:</Text>
+                        <Text style={styles.textSpecs}>Gyroscope X:</Text>
+                        <Text style={styles.textSpecs}>Gyroscope Y:</Text>
+                        <Text style={styles.textSpecs}>Gyroscope Z:</Text>
                     </View>
 
                     <View>
@@ -48,6 +54,9 @@ class informationSection extends React.Component{
                         <Text style={styles.statusTextSpecs}>{acc_info[0]}</Text>
                         <Text style={styles.statusTextSpecs}>{acc_info[1]}</Text>
                         <Text style={styles.statusTextSpecs}>{acc_info[2]}</Text>
+                        <Text style={styles.statusTextSpecs}>{gyro_info[0]}</Text>
+                        <Text style={styles.statusTextSpecs}>{gyro_info[1]}</Text>
+                        <Text style={styles.statusTextSpecs}>{gyro_info[2]}</Text>
                     </View>
 
                 </View>
@@ -59,20 +68,21 @@ class informationSection extends React.Component{
 
 const styles = StyleSheet.create({
     
+    //Original font was 20, paddingTop and Bottom were 20
     textSpecs:{
         fontFamily: 'Roboto',
-        fontSize: 20,
+        fontSize: 16,
         paddingLeft: 25,
         paddingRight: 25,
-        paddingTop: 20,
-        paddingBottom: 20,
+        paddingTop: 15,
+        paddingBottom: 10,
     },
 
     statusTextSpecs:{
         fontFamily: 'Roboto',
-        fontSize: 20,
-        paddingTop: 20,
-        paddingBottom: 20,
+        fontSize: 16,
+        paddingTop: 15,
+        paddingBottom: 10,
         paddingLeft: 80,
     },
 

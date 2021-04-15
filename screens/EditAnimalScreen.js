@@ -48,7 +48,7 @@ export default function EditAnimalScreen({ navigation }) {
                     width: 300,
                     height: 300,
                     resizeMode: 'contain',
-                    marginBottom: 50
+                    marginBottom: Platform.OS == 'ios' ? 50: 0
                   }}/>
              <View style={styles.inputView} >
                 <TextInput 
@@ -80,7 +80,7 @@ export default function EditAnimalScreen({ navigation }) {
             </View>
             
             <TouchableOpacity 
-                style={styles.loginBtn}
+                style={styles.confirmBtn}
                 onPress={editAnimal} >
                 <Text style={{color: "white"}}>Confirm Edit</Text>
             </TouchableOpacity>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         backgroundColor:"#ffe4b5",
         borderRadius:25,
         height:50,
-        marginBottom:Platform.OS === 'ios' ? 62 : 20,
+        marginBottom:Platform.OS === 'ios' ? 62 : 15,
         justifyContent:"center",
         padding:20
       },
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         color:"black",
         fontSize:15
       },
-      loginBtn:{
+      confirmBtn:{
         width:"80%",
         backgroundColor:"#191919",
         borderRadius:25,

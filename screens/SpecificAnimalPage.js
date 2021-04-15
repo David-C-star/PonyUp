@@ -36,8 +36,6 @@ export default function SpecificAnimalPage({route, navigation}) {
             <Animal_Section id = {deviceInfo["id"]}/>
             <Information_Section contraction={deviceInfo["contraction"]} temp={deviceInfo["temperature"]} accx={deviceInfo["accx"]}
             accy={deviceInfo["accy"]} accz={deviceInfo["accz"]} gyx={deviceInfo["gyx"]} gyy={deviceInfo["gyy"]} gyz={deviceInfo["gyz"]}/>
-           
-
           </View>
     
         </View>
