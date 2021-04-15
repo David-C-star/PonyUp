@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, ScrollView, BackHandler} from 'react-native';
+import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 
 
 class informationSection extends React.Component{
@@ -9,13 +9,23 @@ class informationSection extends React.Component{
 		var status_info = ( this.props.inLabor ? "In Labor" : "Normal" );
         var temp_info = this.props.temp;
         var contraction_info = this.props.contraction;
-        var accx_info = this.props.accx;
-        var accy_info = this.props.accy;
-        var accz_info = this.props.accz;
-        var gyx_info = this.props.gyx;
-        var gyy_info = this.props.gyy;
-        var gyz_info = this.props.gyz;
 
+        var acc_info = new Array(this.props.accx, this.props.accy, this.props.accz);
+        var normal_acc_info = new Array(3);
+        console.log("acc_info", acc_info);
+
+        var gyro_info = new Array(this.props.gyx, this.props.gyy, this.props.gyz);
+        console.log("gyro_info", gyro_info);
+
+        var norm_Acc = Math.sqrt(acc_info[0] * acc_info[0] + acc_info[1] * acc_info[1] + acc_info[2] * acc_info[2]);
+        console.log("normalizer", norm_Acc);
+
+        normal_acc_info[0] = acc_info[0]/norm_Acc;
+        normal_acc_info[1] = acc_info[1]/norm_Acc;
+        normal_acc_info[2] = acc_info[2]/norm_Acc;
+
+        var inclination = Math.round((Math.acos(normal_acc_info[2]))*(180/Math.PI));
+        console.log("inclination", inclination);
 
         return(
             <View>
@@ -29,21 +39,15 @@ class informationSection extends React.Component{
                         <Text style={styles.textSpecs}>Accelerometer X:</Text>
                         <Text style={styles.textSpecs}>Accelerometer Y:</Text>
                         <Text style={styles.textSpecs}>Accelerometer Z:</Text>
-                        <Text style={styles.textSpecs}>Gyroscope X:</Text>
-                        <Text style={styles.textSpecs}>Gyroscope Y:</Text>
-                        <Text style={styles.textSpecs}>Gyroscope Z:</Text>
                     </View>
 
                     <View>
                         <Text style={styles.statusTextSpecs}>{status_info}</Text>
                         <Text style={styles.statusTextSpecs}>{temp_info}</Text>
                         <Text style={styles.statusTextSpecs}>{contraction_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{accx_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{accy_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{accz_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{gyx_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{gyy_info}</Text>
-                        <Text style={styles.statusTextSpecs}>{gyz_info}</Text>
+                        <Text style={styles.statusTextSpecs}>{acc_info[0]}</Text>
+                        <Text style={styles.statusTextSpecs}>{acc_info[1]}</Text>
+                        <Text style={styles.statusTextSpecs}>{acc_info[2]}</Text>
                     </View>
 
                 </View>
