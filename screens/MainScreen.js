@@ -174,14 +174,14 @@ export default function MainScreen({ navigation, updateAuthState }) {
     <View style={styles.editButtonSection}>
           <Button
             title="Edit"
-            onPress={() => navigation.navigate('AddDevice')}
+            onPress={() => navigation.navigate('EditAnimal')}
             color="grey"
           />
         </View>        
         <View >
           <Image
             style={styles.animalImage}
-            source={require('../images/horse.jpg')}
+            source={require('../images/dog.jpg')}
           />
         </View>
       </View>
