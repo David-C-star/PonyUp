@@ -11,6 +11,7 @@ import RecoveryScreen from "../screens/RecoveryScreen";
 import VerificationScreen from "../screens/VerificationScreen"
 import AddAnimalScreen from "../screens/AddAnimalScreen"
 import AddDeviceScreen from "../screens/AddDeviceScreen"
+import EditAnimalScreen from "../screens/EditAnimalScreen"
 
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../src/aws-exports';
@@ -71,6 +72,7 @@ function AppNavigation() {
                 </Stack.Screen>
                 <Stack.Screen name="AddAnimal" component={AddAnimalScreen} />
                 <Stack.Screen name="AddDevice" component={AddDeviceScreen} />
+                <Stack.Screen name="EditAnimal" component={EditAnimalScreen} />
                 <Stack.Screen name="SpecificAnimal" component={SpecificAnimalPage} 
                 options={{headerShown: false, header: null}} />          
             </Stack.Navigator>
