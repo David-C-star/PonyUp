@@ -15,20 +15,20 @@ class informationSection extends React.Component{
 
         var acc_info = new Array(this.props.accx, this.props.accy, this.props.accz);
         var normal_acc_info = new Array(3);
-        console.log("acc_info", acc_info);
+        //console.log("acc_info", acc_info);
 
         var gyro_info = new Array(this.props.gyx, this.props.gyy, this.props.gyz);
-        console.log("gyro_info", gyro_info);
+        //console.log("gyro_info", gyro_info);
 
         var norm_Acc = Math.sqrt(acc_info[0] * acc_info[0] + acc_info[1] * acc_info[1] + acc_info[2] * acc_info[2]);
-        console.log("normalizer", norm_Acc);
+        //console.log("normalizer", norm_Acc);
 
         normal_acc_info[0] = acc_info[0]/norm_Acc;
         normal_acc_info[1] = acc_info[1]/norm_Acc;
         normal_acc_info[2] = acc_info[2]/norm_Acc;
 
         var inclination = Math.round((Math.acos(normal_acc_info[2]))*(180/Math.PI));
-        console.log("inclination", inclination);
+        //console.log("inclination", inclination);
 
         return(
             <View>

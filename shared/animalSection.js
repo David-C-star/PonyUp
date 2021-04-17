@@ -5,11 +5,13 @@ import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 class animalSection extends React.Component{
 
     render(){
-        var animalName = this.props.id
+        var animalID = this.props.id
+        var animalName = this.props.name
         return(
 
             <View style={styles.specAnimalBox}>
-                <Text style={styles.nameText}>{animalName}</Text>
+                <Text style={styles.nameText}>{animalID}</Text>
+                <Text style={styles.animalText}>{animalName}</Text>
 
                 <View>
                     <Image
@@ -43,6 +45,14 @@ const styles = StyleSheet.create({
         width: 60,
         marginRight: 25,
         borderRadius: 65/2,
+    },
+
+    animalText:{
+        flex: 2,
+        fontWeight: 'bold',
+        fontFamily: 'Roboto',
+        fontSize: 20,
+        padding: 15
     }
 
 

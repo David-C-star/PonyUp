@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
     View,
@@ -39,7 +38,7 @@ export default function LoginScreen({ navigation, updateAuthState }) {
                     width: 300,
                     height: 300,
                     resizeMode: 'contain',
-                    marginBottom: 50
+                    marginBottom: 10
                   }}/>
              <View style={styles.inputView} >
                 <TextInput 

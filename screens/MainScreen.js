@@ -162,6 +162,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
+      fetchDevice,
       <View
         style={{
           flexDirection: 'row',
@@ -171,7 +172,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
         <Text style={ item.inLabor ? styles.itemStyleAlert : styles.itemStyle } onPress={() => getItem(item)}>
         {item.inLabor ? item.name.toUpperCase() : item.name}
         </Text>
-    <View style={styles.editButtonSection}>
+        <View style={styles.editButtonSection}>
           <Button
             title="Edit"
             onPress={() => navigation.navigate('EditAnimal')}
@@ -206,6 +207,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
 
   const getItem = (item) => {
     // Function for click on an item
+    console.log("item", item);
     navigation.navigate('SpecificAnimal', item);
   };
 
@@ -239,12 +241,17 @@ export default function MainScreen({ navigation, updateAuthState }) {
         onPress={() => navigation.navigate('AddDevice')}
         color='grey'
         /> 
+        <Button
+          title="refresh"
+          onPress={fetchDevice}
+          color="#757575"
+          />
       </View>
   )
 
   return (
     
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#e05d06'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#d84524'}}>
       <StatusBar backgroundColor="grey"/>
       <TouchableOpacity
          onPress={signOut}>

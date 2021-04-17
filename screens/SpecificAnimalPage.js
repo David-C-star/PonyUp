@@ -1,5 +1,13 @@
-import React from 'react';
-import { Platform, Image, StyleSheet, Text, View, BackHandler} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { 
+  Platform, 
+  Image, 
+  StyleSheet, 
+  Text, 
+  View, 
+  BackHandler, 
+  Button, 
+} from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native"
 
@@ -11,10 +19,8 @@ import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
-
-
-export default function SpecificAnimalPage({route, navigation}) {
-  const deviceInfo = route.params;
+export default function SpecificAnimalPage({route, navigation, updateAuthState}) {
+  var deviceInfo = route.params;
 
         return(
           <View style={styles.container}>
@@ -33,11 +39,10 @@ export default function SpecificAnimalPage({route, navigation}) {
     
           <View style={styles.content}>
             {/* form */}
-            <Animal_Section id = {deviceInfo["id"]}/>
+            <Animal_Section id = {deviceInfo["id"]} name = {deviceInfo["name"]}/>
             <Information_Section contraction={deviceInfo["contraction"]} temp={deviceInfo["temperature"]} accx={deviceInfo["accx"]}
             accy={deviceInfo["accy"]} accz={deviceInfo["accz"]} gyx={deviceInfo["gyx"]} gyy={deviceInfo["gyy"]} gyz={deviceInfo["gyz"]}/>
           </View>
-    
         </View>
         );
 }
@@ -52,13 +57,13 @@ const styles = StyleSheet.create({
     },
   
     content: {
-      backgroundColor: '#e05d06'
+      backgroundColor: '#d84524'
     },
 
     header:{
       height: Platform.OS === 'ios' ? 150 : 100,
       paddingRight: 20,
-      backgroundColor: '#e05d06',
+      backgroundColor: '#d84524',
       alignItems: 'center',
       flexDirection: 'row',
   },
