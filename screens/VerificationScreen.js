@@ -19,6 +19,7 @@ export default function VerificationScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [authCode, setAuthCode] = useState('');
     async function confirmSignUp() {
+      // Handels the verfication of a new user
       try {
         await Auth.confirmSignUp(username, authCode);
         alert('Account Created')

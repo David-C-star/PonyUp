@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 
 
 class informationSection extends React.Component{
-
+    // This component is where the data is set up to be displayed.
 
     render(){
         //All the data that will be displayed are declared into variables.
@@ -14,6 +14,10 @@ class informationSection extends React.Component{
         var contraction_info = this.props.contraction;
 
         var acc_info = new Array(this.props.accx, this.props.accy, this.props.accz);
+        var gyro_info = new Array(this.props.gyx, this.props.gyy, this.props.gyz);
+        //console.log("gyro_info", gyro_info);
+
+        //All of this math is supposed to give the degress of inclination of the accelerometer.
         var normal_acc_info = new Array(3);
         //console.log("acc_info", acc_info);
 

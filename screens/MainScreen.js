@@ -22,7 +22,11 @@ import * as subscriptions from '../graphql/subscriptions';
 Amplify.configure(awsconfig);
 Auth.configure(awsconfig);
 
-
+/*
+*The Main Screen is the screen that displays a list of all the devices a user has registered.
+*The device is displayed with the name of the animal, given in the AddAnimal Screen, and a 
+*a default picture that depends on the type of animal it was given. 
+*/
 export default function MainScreen({ navigation, updateAuthState }) { 
   // Handles Signing user out
   async function signOut() {
@@ -162,6 +166,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
+      // Creates the list by adding the name, edit button, and the image
       fetchDevice,
       <View
         style={{
@@ -192,6 +197,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   const ItemSeparatorView = () => {
     return (
       // Flat List Item Separator
+      // Creates the space between items in the list
       <View
         style={{
           height: 0.5,
@@ -212,6 +218,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   };
 
   const renderHeader = () => (
+    // The header above the list and the search bar
     <View
       style={{
         backgroundColor: '#d84524',
@@ -235,6 +242,7 @@ export default function MainScreen({ navigation, updateAuthState }) {
   )
   
   const renderFooter = () => (
+    // Creates the footer of the list, the register device button and the refresh button
       <View>
         <Button
         title="Register a New Device"

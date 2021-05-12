@@ -23,6 +23,8 @@ const AuthenticationStack = createStackNavigator();
 const Stack = createStackNavigator();
 
 function AppNavigation() {
+    // This component handles all the navigations between the screens. If you add a new screen, you
+    // must add it here.
     const [isUserLoggedIn, setUserLoggedIn] = useState('initializing');
 
     useEffect(() => {

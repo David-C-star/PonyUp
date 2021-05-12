@@ -18,6 +18,7 @@ export default function SignUpScreen({ navigation }) {
   const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     async function signUp() {
+    // Handles the user sign up
     try {
       await Auth.signUp({ username, password });
       console.log(' Sign-up Confirmed');

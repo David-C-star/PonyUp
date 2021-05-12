@@ -20,6 +20,7 @@ export default function LoginScreen({ navigation, updateAuthState }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     async function signIn() {
+    // Handles user sign in
     try {
         await Auth.signIn(username, password);
         console.log(' Success');

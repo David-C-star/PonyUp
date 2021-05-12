@@ -19,6 +19,7 @@ export default function RecoveryScreen({ navigation }) {
     const [authCode, setAuthCode] = useState('');
     const [password, setPassword] = useState('');
     async function setNewPassword() {
+    // Handles the reset of the user's password
         try {
             await Auth.forgotPasswordSubmit(username, authCode, password);
             alert('Password successfully changed.')

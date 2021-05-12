@@ -20,6 +20,10 @@ LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export default function SpecificAnimalPage({route, navigation, updateAuthState}) {
+  // This is the page where the data for the animal is displayed. Two components are called
+  // animalSection and informationSection by passing the variables to them. animalSection displays the device id and name.
+  // informationSection displays contraction, temperature, x y and z for the accelerometer, and the x y and z
+  // for the gyroscope.
   var deviceInfo = route.params;
 
         return(

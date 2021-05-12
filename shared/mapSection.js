@@ -5,6 +5,11 @@ import {StyleSheet, View, Dimensions} from 'react-native';
 
 
 class mapSection extends React.Component{
+    // This is an obsolete component. It was supposed to create a map using GPS coordinates
+    // but the device doesn't have those capabilities. The database no longer supports these variables
+    // so if you want to reuse this component, you have to add this attribute to the database. This was
+    // was written with the idea that the variable passed into it contained the latitude and longitude
+    // in one string, separated by a comma. The latitude is supposed to go first in the string.
 
     render(){
         //var latlongData = this.props.latlong;

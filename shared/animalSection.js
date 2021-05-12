@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View, BackHandler} from 'react-native';
 
 
 class animalSection extends React.Component{
+    // This component displays the name of the animal and the animal id.
 
     render(){
         var animalID = this.props.id

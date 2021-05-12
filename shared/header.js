@@ -4,6 +4,7 @@ import { SearchBar } from 'react-native-elements';
 
 
 class Header extends React.Component{
+    // Creates the search bar for the SpecificAnimalPage
 
     state = {
         search: '',
