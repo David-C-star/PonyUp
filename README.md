@@ -10,7 +10,7 @@ The backend is connected to an AWS dashboard relating to the organization AWS ac
 ### Clone to a local destination
 The app can be cloned with:
 
-`git clone https://github.com/cadecottrell/PonyUpApp.git`  
+`git clone https://github.com/David-c-star/PonyUp.git`  
 
 
 ### Start the application
@@ -34,4 +34,5 @@ The app is able to perform following activity:
 2. Login to access a personal portal 
 3. Register device using device ID and name
 4. Get real time update of the device changes
+5. Edit animal information
 
